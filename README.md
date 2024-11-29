@@ -85,11 +85,11 @@ Frontend will be available at `http://localhost:5173`
 
 ## API Endpoints
 
-`GET /api/items/` - List all items
-`POST /api/items/` - Create a new item
-`GET /api/items/{id}/` - Retrieve an item
-`PUT /api/items/{id}/` - Update an item
-`DELETE /api/items/{id}/` - Delete an item
+- `GET /api/items/` - List all items
+- `POST /api/items/` - Create a new item
+- `GET /api/items/{id}/` - Retrieve an item
+- `PUT /api/items/{id}/` - Update an item
+- `DELETE /api/items/{id}/` - Delete an item
 
 ## Environment Variables
 
