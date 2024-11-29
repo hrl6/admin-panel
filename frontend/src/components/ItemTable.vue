@@ -23,8 +23,9 @@
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Updated</th>
+            <!-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Updated</th> -->
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
@@ -33,8 +34,16 @@
             <td class="px-6 py-4 whitespace-nowrap">{{ item.title }}</td>
             <td class="px-6 py-4">{{ item.description }}</td>
             <td class="px-6 py-4 whitespace-nowrap">RM{{ item.price }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span v-if="item.stock === 0" class="px-2 py-1 rounded text-red-700 border-[1px] border-red-500 bg-red-300/80">{{ item.stock }}</span>
+              <span v-else-if="item.stock > 0 && item.stock <= 10" class="px-2 py-1 rounded text-yellow-700 border-[1px] border-yellow-500 bg-yellow-300/80">{{ item.stock }}</span>
+              <span v-else="item.stock > 10" class="px-2 py-1 rounded text-green-700 border-[1px] border-green-500 bg-green-300/80">{{ item.stock }}</span>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap">{{ formatDate(item.date_created) }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ formatDate(item.date_updated) }}</td>
+            <!-- <td class="px-6 py-4 whitespace-nowrap">
+              <span v-if="formatDate(item.date_created) === formatDate(item.date_updated)" class="bg-gray-100 px-2 py-1 rounded text-gray-600">No Update</span>
+              <span v-else>{{ formatDate(item.date_updated) }}</span>
+            </td> -->
             <td class="px-6 py-4 whitespace-nowrap">
               <button 
                 @click="editItem(item)"
@@ -64,6 +73,7 @@
             <input 
               v-model="formData.title" 
               type="text" 
+              placeholder="Item name..."
               required
               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >
@@ -72,16 +82,29 @@
             <label class="block text-sm font-medium text-gray-700">Description</label>
             <textarea 
               v-model="formData.description" 
+              placeholder="About item..."
               required
               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             ></textarea>
           </div>
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700">Price</label>
+            <label class="block text-sm font-medium text-gray-700">Price (RM)</label>
             <input 
               v-model="formData.price" 
               type="number" 
               step="0.01" 
+              placeholder="Digit only..."
+              required
+              class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Stock</label>
+            <input 
+              v-model="formData.stock" 
+              type="number" 
+              step="1" 
+              placeholder="Stock left..."
               required
               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >
@@ -118,7 +141,8 @@ const showEditModal = ref(false);
 const formData = ref({
   title: '',
   description: '',
-  price: ''
+  price: '',
+  stock: ''
 });
 const editingItemId = ref(null);
 
@@ -145,7 +169,7 @@ const formatDate = (dateString) => {
 const closeModal = () => {
   showAddModal.value = false;
   showEditModal.value = false;
-  formData.value = { title: '', description: '', price: '' };
+  formData.value = { title: '', description: '', price: '', stock: '' };
   editingItemId.value = null;
 };
 
