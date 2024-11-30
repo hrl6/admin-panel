@@ -58,7 +58,7 @@
 
     <!-- add/update items -->
     <div v-if="showAddModal || showEditModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div class="bg-white p-6 rounded-lg w-full max-w-md">
+      <div class="bg-white p-6 rounded-lg w-full max-w-md mx-6">
         <h2 class="text-xl font-bold mb-4">{{ showEditModal ? 'Edit Item' : 'Add New Item' }}</h2>
         <form @submit.prevent="handleSubmit">
           <div class="mb-4">
