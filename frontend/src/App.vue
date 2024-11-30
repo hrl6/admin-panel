@@ -1,7 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen bg-gray-100/50">
     <header class="bg-white shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4">
+      <div class="flex gap-2 max-w-7xl mx-auto py-6 px-6">
+        <img src="../public/admin-panel-logo.svg" alt="Logo Admin">
         <h1 class="text-3xl font-bold text-gray-900">Admin Panel</h1>
       </div>
     </header>

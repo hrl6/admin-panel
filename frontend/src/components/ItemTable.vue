@@ -1,6 +1,6 @@
 <template>
   <div class="p-6">
-    <div class="mb-6 flex justify-between items-center">
+    <div class="mb-6 flex flex-wrap justify-between gap-4 flex-col-reverse sm:flex-row">
       <input 
         type="text" 
         v-model="searchQuery" 
@@ -9,9 +9,8 @@
       >
       <button 
         @click="showAddModal = true"
-        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-      >
-        Add New Item
+        class="flex gap-2 justify-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+      ><PackagePlus />Add New Item
       </button>
     </div>
 
@@ -35,7 +34,7 @@
             <td class="px-6 py-4">{{ item.description }}</td>
             <td class="px-6 py-4 whitespace-nowrap">RM{{ item.price }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <span v-if="item.stock === 0" class="px-2 py-1 rounded text-red-700 border-[1px] border-red-500 bg-red-300/80">{{ item.stock }}</span>
+              <span v-if="item.stock === 0" class="px-2 py-1 rounded text-gray-700 border-[1px] border-gray-500 bg-gray-300/80">{{ item.stock }}</span>
               <span v-else-if="item.stock > 0 && item.stock <= 10" class="px-2 py-1 rounded text-yellow-700 border-[1px] border-yellow-500 bg-yellow-300/80">{{ item.stock }}</span>
               <span v-else="item.stock > 10" class="px-2 py-1 rounded text-green-700 border-[1px] border-green-500 bg-green-300/80">{{ item.stock }}</span>
             </td>
@@ -44,18 +43,12 @@
               <span v-if="formatDate(item.date_created) === formatDate(item.date_updated)" class="bg-gray-100 px-2 py-1 rounded text-gray-600">No Update</span>
               <span v-else>{{ formatDate(item.date_updated) }}</span>
             </td> -->
-            <td class="px-6 py-4 whitespace-nowrap">
-              <button 
-                @click="editItem(item)"
-                class="text-blue-600 hover:text-blue-900 mr-2"
-              >
-                Edit
+            <td class="px-6 py-4 whitespace-nowrap my-auto">
+              <button @click="editItem(item)" class="text-gray-600 hover:text-gray-900 mr-2">
+                <Pencil />
               </button>
-              <button 
-                @click="deleteItem(item.id)"
-                class="text-red-600 hover:text-red-900"
-              >
-                Delete
+              <button @click="deleteItem(item.id)" class="text-red-700 hover:text-red-900">
+                <Trash2 />
               </button>
             </td>
           </tr>
@@ -133,6 +126,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import api from '../services/api';
+import { PackagePlus } from 'lucide-vue-next';
+import { Pencil } from 'lucide-vue-next';
+import { Trash2 } from 'lucide-vue-next';
 
 const items = ref([]);
 const searchQuery = ref('');

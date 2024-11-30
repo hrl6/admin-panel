@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        lexend: ['Lexend', 'sans-serif'],
+        'roboto-slab': ['Roboto Slab', 'serif']
+      },
+    },
   },
   plugins: [],
 }
