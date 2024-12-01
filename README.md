@@ -111,6 +111,10 @@ PGPASSWORD=your_database_password
 PGHOST=localhost
 PGPORT=5432
 ```
+### Frontend `.env.production`
+```bash
+VITE_API_URL=https://your-api-url/api
+```
 
 ## License
 
