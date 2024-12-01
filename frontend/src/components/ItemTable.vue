@@ -29,6 +29,11 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
+          <tr v-if="connectionError">
+            <td colspan="6" class="px-6 py-8 text-center">
+              <p class="text-sm text-gray-500 mt-1">Server was disabled.</p>
+            </td>
+          </tr>
           <tr v-for="item in filteredItems" :key="item.id">
             <td class="px-6 py-4 whitespace-nowrap">{{ item.title }}</td>
             <td class="px-6 py-4">{{ item.description }}</td>
@@ -130,6 +135,7 @@ import { PackagePlus } from 'lucide-vue-next';
 import { Pencil } from 'lucide-vue-next';
 import { Trash2 } from 'lucide-vue-next';
 
+const connectionError = ref(false);
 const items = ref([]);
 const searchQuery = ref('');
 const showAddModal = ref(false);
@@ -154,6 +160,7 @@ const loadItems = async () => {
     const response = await api.getItems();
     items.value = response.data;
   } catch (error) {
+    connectionError.value = true
     console.error('Error loading items:', error);
   }
 };
